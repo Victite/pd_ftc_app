@@ -54,7 +54,8 @@ public abstract class AM_AbstractOp extends OpMode {
 	DcMotor dc_tape3;
 	DcMotor dc_angle;
 
-	Servo sv_climberArm;
+	Servo sv_depositArm;
+	Servo sv_climbingArm;
 
 	public AM_AbstractOp() {
 		dc_FR = hardwareMap.dcMotor.get("fr");
@@ -70,7 +71,8 @@ public abstract class AM_AbstractOp extends OpMode {
 		dc_tape3 = hardwareMap.dcMotor.get("tape3");
 		dc_angle = hardwareMap.dcMotor.get("angle");
 
-		sv_climberArm = hardwareMap.servo.get("arm");
+		sv_depositArm = hardwareMap.servo.get("depo arm");
+		sv_climbingArm = hardwareMap.servo.get("climb arm");
 	}
 
 	/*
