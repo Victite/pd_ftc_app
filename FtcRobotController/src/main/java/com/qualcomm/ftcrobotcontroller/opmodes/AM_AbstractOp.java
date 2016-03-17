@@ -42,37 +42,49 @@ public abstract class AM_AbstractOp extends OpMode {
 		By treating each of our OpModes as subclasses of this abstract class, we are able to change all of our
 	 */
 
-	//Wheel Motors
-	DcMotor dc_FR;
-	DcMotor dc_FL;
-	DcMotor dc_BR;
-	DcMotor dc_BL;
+	DcMotor motorFR;
+	DcMotor motorBR;
+	DcMotor motorFL;
+	DcMotor motorBL;
 
-	//Tape Mechanism Motors
-	DcMotor dc_tape1;
-	DcMotor dc_tape2;
-	DcMotor dc_tape3;
-	DcMotor dc_angle;
+	DcMotor tape1;
+	DcMotor tape2;
+	DcMotor tape3;
+	DcMotor motorAngle;
 
-	Servo sv_depositArm;
-	Servo sv_climbingArm;
+	Servo frontArm;
 
+	Servo leftArm;
+	Servo rightArm;
+
+	/**
+	 * Constructor
+	 */
 	public AM_AbstractOp() {
-		dc_FR = hardwareMap.dcMotor.get("fr");
-		dc_FL = hardwareMap.dcMotor.get("fl");
-		dc_BR = hardwareMap.dcMotor.get("br");
-		dc_BL = hardwareMap.dcMotor.get("bl");
 
-		dc_FL.setDirection(DcMotor.Direction.REVERSE);
-		dc_BL.setDirection(DcMotor.Direction.REVERSE);
+	}
 
-		dc_tape1 = hardwareMap.dcMotor.get("tape1");
-		dc_tape2 = hardwareMap.dcMotor.get("tape2");
-		dc_tape3 = hardwareMap.dcMotor.get("tape3");
-		dc_angle = hardwareMap.dcMotor.get("angle");
+	@Override
+	public void init() {
 
-		sv_depositArm = hardwareMap.servo.get("depo arm");
-		sv_climbingArm = hardwareMap.servo.get("climb arm");
+		motorFR = hardwareMap.dcMotor.get("motorFR");
+		motorBR = hardwareMap.dcMotor.get("motorBR");
+		motorFL = hardwareMap.dcMotor.get("motorFL");
+		motorBL = hardwareMap.dcMotor.get("motorBL");
+
+		motorFR.setDirection(DcMotor.Direction.REVERSE);
+		motorBR.setDirection(DcMotor.Direction.REVERSE);
+
+		tape1 = hardwareMap.dcMotor.get("tape1");
+		tape2 = hardwareMap.dcMotor.get("tape2");
+		tape3 = hardwareMap.dcMotor.get("tape3");
+		motorAngle = hardwareMap.dcMotor.get("angle");
+
+		frontArm = hardwareMap.servo.get("frontarm");
+
+		leftArm = hardwareMap.servo.get("leftarm");
+		rightArm = hardwareMap.servo.get("rightarm");
+
 	}
 
 	/*
