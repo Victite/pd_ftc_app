@@ -31,73 +31,57 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-public class AM_TeleOp extends AM_AbstractOp {
+public abstract class AM_TeleOp extends AM_AbstractOp {
 
-    /*
-     * This method will be called repeatedly in a loop
-     *
-     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#run()
-     */
+    // Variables for TeleOp
+    boolean rooted = false;
+
+    abstract void swingers();
+
     @Override
     public void loop() {
 
-        //Joystick variables to be updated constantly
+        // Joystick variables to be updated constantly
         float rThrottle = gamepad1.right_stick_y;
         float lThrottle = gamepad1.left_stick_y;
         float adjustAngle = gamepad1.right_trigger - gamepad1.left_trigger;
 
-        //Wheel motors assigned to the joystick variables of their respective side
-        motorFR.setPower(rThrottle);
-        motorBR.setPower(rThrottle);
-        motorFL.setPower(lThrottle);
-        motorBL.setPower(lThrottle);
+        // Wheel motors assigned to the joystick variables of their respective side
+        if (!rooted) {
+            motorFR.setPower(rThrottle);
+            motorBR.setPower(rThrottle);
+            motorFL.setPower(lThrottle);
+            motorBL.setPower(lThrottle);
+        }
 
-        //
-        if(gamepad1.right_bumper) {
+        // Tape Mech Motors
+        if (gamepad1.right_bumper) {
             tape1.setPower(1.0);
             tape2.setPower(1.0);
             tape3.setPower(1.0);
-        }
-        else if(gamepad1.left_bumper) {
+            rooted = true;
+        } else if (gamepad1.left_bumper) {
             tape1.setPower(-1.0);
             tape2.setPower(-1.0);
             tape3.setPower(-1.0);
-        }
-        else {
+        } else {
             tape1.setPower(0.0);
             tape2.setPower(0.0);
             tape3.setPower(0.0);
+            rooted = false;
         }
         motorAngle.setPower(adjustAngle);
 
-        if(gamepad1.y) {
-            if(frontArm.getPosition() == 1.0)
-                frontArm.setPosition(0.0);
-            else
+        if (gamepad1.y) {
+            if (frontArm.getPosition() == 0.2)
                 frontArm.setPosition(1.0);
-            while(gamepad1.y) {
-
-            }
-        }
-        if(gamepad1.x) {
-            if(leftArm.getPosition() == 1.0)
-                leftArm.setPosition(0.0);
             else
-                leftArm.setPosition(1.0);
-            while(gamepad1.x) {
+                frontArm.setPosition(0.2);
+            while (gamepad1.y) {
 
             }
         }
-        if(gamepad1.b) {
-            if(rightArm.getPosition() == 1.0)
-                rightArm.setPosition(0.0);
-            else
-                rightArm.setPosition(1.0);
-            while(gamepad1.b) {
-
-            }
-        }
-
+        this.swingers();
         // update the position of the arm.
 
 
@@ -127,33 +111,5 @@ public class AM_TeleOp extends AM_AbstractOp {
      * scaled value is less than linear.  This is to make it easier to drive
      * the robot more precisely at slower speeds.
      */
-    double scaleInput(double dVal)  {
-        double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
-                0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
-
-        // get the corresponding index for the scaleInput array.
-        int index = (int) (dVal * 16.0);
-
-        // index should be positive.
-        if (index < 0) {
-            index = -index;
-        }
-
-        // index cannot exceed size of array minus 1.
-        if (index > 16) {
-            index = 16;
-        }
-
-        // get value from the array.
-        double dScale = 0.0;
-        if (dVal < 0) {
-            dScale = -scaleArray[index];
-        } else {
-            dScale = scaleArray[index];
-        }
-
-        // return scaled value.
-        return dScale;
-    }
 
 }
