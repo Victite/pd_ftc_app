@@ -73,26 +73,15 @@ public abstract class AM_TeleOp extends AM_AbstractOp {
         motorAngle.setPower(adjustAngle);
 
         if (gamepad1.y) {
-            if (frontArm.getPosition() == 0.2)
-                frontArm.setPosition(1.0);
+            if (frontArm.getPosition() < 0.9)
+                frontArm.setPosition(0.95);
             else
-                frontArm.setPosition(0.2);
+                frontArm.setPosition(0.77);
             while (gamepad1.y) {
 
             }
         }
         this.swingers();
-        // update the position of the arm.
-
-
-
-		/*
-		 * Send telemetry data back to driver station. Note that if we are using
-		 * a legacy NXT-compatible motor controller, then the getPower() method
-		 * will return a null value. The legacy NXT-compatible motor controllers
-		 * are currently write only.
-		 */
-
     }
 
     /*
@@ -102,6 +91,8 @@ public abstract class AM_TeleOp extends AM_AbstractOp {
      */
     @Override
     public void stop() {
+        rightArm.setPosition(0.7764706);
+        frontArm.setPosition(0.95);
 
     }
 

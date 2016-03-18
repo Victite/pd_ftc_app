@@ -6,15 +6,13 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 public class AM_BlueTeleOp extends AM_TeleOp {
     public void swingers() {
         if (gamepad1.x) {
-            if (leftArm.getPosition() < 0.6)
-                leftArm.setPosition(0.647);
-            else if (leftArm.getPosition() > 0.6 && leftArm.getPosition() < 0.8)
-                leftArm.setPosition(0.85);
+            if (leftArm.getPosition() > 0.6)
+                leftArm.setPosition(0.75);
+            else if (leftArm.getPosition() < 0.6 && leftArm.getPosition() > 0.8)
+                leftArm.setPosition(0.878);
             else
-                leftArm.setPosition(0.08627451);
-            while (gamepad1.x) {
-
-            }
+                leftArm.setPosition(0.137);
+            while (gamepad1.x);
         }
     }
 }

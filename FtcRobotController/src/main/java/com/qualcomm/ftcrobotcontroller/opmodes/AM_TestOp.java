@@ -3,7 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 /**
  * Created by MRHFTC on 3/17/2016.
  */
-public class TestOp extends AM_AbstractOp {
+public class AM_TestOp extends AM_AbstractOp {
 
     // Variables for TeleOp
     Double front = 0.5;

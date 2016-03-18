@@ -81,12 +81,12 @@ public abstract class AM_AbstractOp extends OpMode {
 		motorAngle = hardwareMap.dcMotor.get("angle");
 
 		frontArm = hardwareMap.servo.get("frontarm");
-		frontArm.setPosition(0.2);
+		frontArm.setPosition(0.77);
 
 		leftArm = hardwareMap.servo.get("leftarm");
 		rightArm = hardwareMap.servo.get("rightarm");
-		leftArm.setPosition(0.08627451);
-		rightArm.setPosition(0.5);
+		leftArm.setPosition(0.137);
+		rightArm.setPosition(0.776);
 
 	}
 
