@@ -35,6 +35,7 @@ public abstract class AM_TeleOp extends AM_AbstractOp {
 
     // Variables for TeleOp
     boolean rooted = false;
+    double swimPosition;
 
     abstract void swingers();
 
@@ -44,7 +45,6 @@ public abstract class AM_TeleOp extends AM_AbstractOp {
         // Joystick variables to be updated constantly
         float rThrottle = gamepad1.right_stick_y;
         float lThrottle = gamepad1.left_stick_y;
-        float adjustAngle = gamepad1.right_trigger - gamepad1.left_trigger;
 
         // Wheel motors assigned to the joystick variables of their respective side
         if (!rooted) {
@@ -73,34 +73,36 @@ public abstract class AM_TeleOp extends AM_AbstractOp {
         motorAngle.setPower(adjustAngle);
 
         if (gamepad1.y) {
-            if (frontArm.getPosition() < 0.9)
-                frontArm.setPosition(0.95);
-            else
-                frontArm.setPosition(0.77);
-            while (gamepad1.y) {
-
-            }
+            frontArm.setPosition(0.2862);
         }
-        this.swingers();
-    }
 
-    /*
-     * Code to run when the op mode is first disabled goes here
-     *
-     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
-     */
+        if (gamepad1.b) {
+            if (depoArm.getPosition() >= 0.5)
+                depoArm.setPosition(0.0);
+            else
+                depoArm.setPosition(1.0);
+            while (gamepad1.b);
+        }
+
+        this.swingers();
+
+        if(gamepad1.dpad_down){
+            swimPosition = ((Math.cos(3*time)/2)+0.5);
+            leftArm.setPosition(swimPosition * 0.7294 + 0.1176);
+            rightArm.setPosition(1 - (swimPosition * 0.7764706 + 0.2235294));
+        }
+
+        telemetry.addData("1 - Right Throttle", rThrottle);
+        telemetry.addData("1 - Left Throttle", lThrottle);
+        telemetry.addData("2 - Mech Angle", adjustAngle);
+        telemetry.addData("3 - Left Flipper", leftArm.getPosition());
+        telemetry.addData("3 - Right Flipper", rightArm.getPosition());
+    }
     @Override
     public void stop() {
         rightArm.setPosition(0.7764706);
+        leftArm.setPosition(0.1176);
         frontArm.setPosition(0.95);
 
     }
-
-
-    /*
-     * This method scales the joystick input so for low joystick values, the
-     * scaled value is less than linear.  This is to make it easier to drive
-     * the robot more precisely at slower speeds.
-     */
-
 }

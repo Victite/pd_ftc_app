@@ -9,6 +9,7 @@ public class AM_TestOp extends AM_AbstractOp {
     Double front = 0.5;
     Double left = 0.5;
     Double right = 0.5;
+    Double depo = 0.5;
     
     @Override
     public void loop() {
@@ -40,13 +41,24 @@ public class AM_TestOp extends AM_AbstractOp {
             while(gamepad1.dpad_right);
         }
 
+        if(gamepad1.a) {
+            depo += 0.01;
+            while(gamepad1.a);
+        }
+        if(gamepad1.dpad_down){
+            depo -= 0.01;
+            while(gamepad1.dpad_down);
+        }
+
         frontArm.setPosition(front);
         leftArm.setPosition(left);
         rightArm.setPosition(right);
+        depoArm.setPosition(depo);
 
         telemetry.addData("Front Arm Position", frontArm.getPosition());
         telemetry.addData("Left Arm Position", leftArm.getPosition());
         telemetry.addData("Right Arm Position", rightArm.getPosition());
+        telemetry.addData("Depo Arm Position", depoArm.getPosition());
 
 
 

@@ -56,6 +56,7 @@ public abstract class AM_AbstractOp extends OpMode {
 
 	Servo leftArm;
 	Servo rightArm;
+	Servo depoArm;
 
 	/**
 	 * Constructor
@@ -81,12 +82,15 @@ public abstract class AM_AbstractOp extends OpMode {
 		motorAngle = hardwareMap.dcMotor.get("angle");
 
 		frontArm = hardwareMap.servo.get("frontarm");
-		frontArm.setPosition(0.77);
+		frontArm.setPosition(0.1);
 
 		leftArm = hardwareMap.servo.get("leftarm");
 		rightArm = hardwareMap.servo.get("rightarm");
-		leftArm.setPosition(0.137);
+		leftArm.setPosition(0.1176);
 		rightArm.setPosition(0.776);
+
+		depoArm = hardwareMap.servo.get("depoarm");
+		depoArm.setPosition(1.0);
 
 	}
 
