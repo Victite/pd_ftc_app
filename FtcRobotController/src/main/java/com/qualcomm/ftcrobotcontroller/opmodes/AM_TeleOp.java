@@ -45,21 +45,19 @@ public abstract class AM_TeleOp extends AM_AbstractOp {
         // Joystick variables to be updated constantly
         float rThrottle = gamepad1.right_stick_y;
         float lThrottle = gamepad1.left_stick_y;
+        float adjustAngle = gamepad1.left_trigger - gamepad1.right_trigger;
 
         // Wheel motors assigned to the joystick variables of their respective side
-        if (!rooted) {
-            motorFR.setPower(rThrottle);
-            motorBR.setPower(rThrottle);
-            motorFL.setPower(lThrottle);
-            motorBL.setPower(lThrottle);
-        }
+        motorFR.setPower(rThrottle);
+        motorBR.setPower(rThrottle);
+        motorFL.setPower(lThrottle);
+        motorBL.setPower(lThrottle);
 
         // Tape Mech Motors
         if (gamepad1.right_bumper) {
             tape1.setPower(1.0);
             tape2.setPower(1.0);
             tape3.setPower(1.0);
-            rooted = true;
         } else if (gamepad1.left_bumper) {
             tape1.setPower(-1.0);
             tape2.setPower(-1.0);
@@ -68,7 +66,6 @@ public abstract class AM_TeleOp extends AM_AbstractOp {
             tape1.setPower(0.0);
             tape2.setPower(0.0);
             tape3.setPower(0.0);
-            rooted = false;
         }
         motorAngle.setPower(adjustAngle);
 
